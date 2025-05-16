@@ -5,8 +5,8 @@ import cors from 'cors';
 const app = express();
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    Credential : true
+    origin: (origin, callback) => callback(null, true), // allow all origins
+    credentials: true // must be 'credentials', not 'Credential'
 }));
 
 app.use(express.json());
