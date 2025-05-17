@@ -20,19 +20,28 @@ const Profile = () => {
     fetchUser()
   }, [])
 
-  if (loading) return <div className="text-center mt-10">Loading...</div>
-  if (error) return <div className="text-center text-red-500 mt-10">{error}</div>
+  if (loading) return <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#181A20] to-[#232526]"><span className="text-[#C7C9D3] text-lg">Loading...</span></div>
+  if (error) return <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#181A20] to-[#232526]"><span className="text-red-400 text-lg font-semibold">{error}</span></div>
   if (!user) return null
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white rounded-xl shadow-lg p-8">
-      <div className="flex flex-col items-center">
-        <img src={user.avatar} alt="Avatar" className="w-24 h-24 rounded-full mb-4 object-cover border-2 border-blue-500" />
-        <h2 className="text-2xl font-bold mb-1">{user.fullName}</h2>
-        <p className="text-gray-600 mb-2">@{user.username}</p>
-        <p className="text-gray-700 mb-2">{user.email}</p>
+    <div className="min-h-screen bg-gradient-to-b from-[#181A20] to-[#232526] flex flex-col items-center pt-24 pb-12 px-2">
+      <div className="w-full max-w-md bg-[#23272F] rounded-2xl shadow-2xl border border-[#353945] p-8 flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center w-full">
+          <div className="relative mb-4">
+            <img src={user.avatar} alt="Avatar" className="w-28 h-28 rounded-full object-cover border-4 border-[#ff512f] shadow-lg" />
+            {user.coverImage && (
+              <img src={user.coverImage} alt="Cover" className="absolute -top-8 left-1/2 -translate-x-1/2 w-40 h-16 object-cover rounded-xl border-2 border-[#353945] shadow-md opacity-80" />
+            )}
+          </div>
+          <h2 className="text-2xl font-extrabold text-white mb-1 tracking-tight drop-shadow">{user.fullName}</h2>
+          <p className="text-[#ff512f] font-semibold mb-1">@{user.username}</p>
+          <p className="text-[#C7C9D3] mb-2">{user.email}</p>
+        </div>
         {user.coverImage && (
-          <img src={user.coverImage} alt="Cover" className="w-full h-32 object-cover rounded-md mt-4" />
+          <div className="w-full flex justify-center mt-2">
+            <img src={user.coverImage} alt="Cover" className="w-full h-28 object-cover rounded-xl border border-[#353945] shadow" />
+          </div>
         )}
       </div>
     </div>
